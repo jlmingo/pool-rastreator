@@ -16,11 +16,11 @@ def main():
     key = 'GOOGLETOKEN'
     value = os.getenv(key)
 
-    def downloader(image_url, i):
+    def downloader(image_url, i, name):
         '''
         Downloads and names png images
         '''
-        file_name = "pool-"+ str(i) + '.png'
+        file_name = "name"+ str(i) + '.png'
         urllib.request.urlretrieve(image_url,file_name)
 
     # Download all Washington pools, commented to avoid executing
@@ -28,7 +28,7 @@ def main():
         y_coord= row.centroid.y
         x_coord = row.centroid.x
         url = f"https://maps.googleapis.com/maps/api/staticmap?center={y_coord},{x_coord}&zoom=20&size=400x400&maptype=satellite&key={value}"
-        downloader(url, index)
+        downloader(url, index, "pool-")
 
     gdf["centroid_export"] = gdf.centroid.apply(lambda row: (row.x, row.y))
     df1 = pd.DataFrame(gdf.centroid_export)
