@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 import urllib
 import urllib.request
 import pandas as pd
+from popfunctions
+import downloader
 
 def main():
     #Reading geodataframe with Swimming Pools in Washington
@@ -16,17 +18,9 @@ def main():
     key = 'GOOGLETOKEN'
     value = os.getenv(key)
 
-    def downloader(image_url, i, name):
-        '''
-        Downloads and names png images
-        '''
-        file_name = "name"+ str(i) + '.png'
-        urllib.request.urlretrieve(image_url,file_name)
-
-    # Download all Washington pools, commented to avoid executing
     for index, row in gdf.iterrows():
-        y_coord= row.centroid.y
-        x_coord = row.centroid.x
+        y_coord= row.centroid.y #laatitude
+        x_coord = row.centroid.x #longitude
         url = f"https://maps.googleapis.com/maps/api/staticmap?center={y_coord},{x_coord}&zoom=20&size=400x400&maptype=satellite&key={value}"
         downloader(url, index, "pool-")
 

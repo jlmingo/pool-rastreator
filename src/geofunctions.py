@@ -13,7 +13,7 @@ def pixel_to_coords(x,y,zoom=20):
     latitude = 2 * np.arctan(np.exp(np.pi - y / (128 / np.pi*2**zoom))) - np.pi / 2
     return (np.degrees(longitude), np.degrees(latitude))
 
-def bounds_coords(longitude, latitude, zoom=20, width=400, heigh=400):
+def bounds_coords(longitude, latitude, zoom=20, width=256, heigh=256):
     '''from longitude and latitude in degrees and zoom, returns left bottom and right top coords in pixel coordinates'''
     x = coords_to_pixel(longitude, latitude, zoom)[0]
     y = coords_to_pixel(longitude, latitude, zoom)[1]
@@ -28,7 +28,7 @@ def bounds_coords(longitude, latitude, zoom=20, width=400, heigh=400):
     
     return [left_bottom_coords, right_top_coords]
 
-def center_coords(longitude, latitude, zoom=20, width=400, heigh=400):
+def center_coords(longitude, latitude, zoom=20, width=256, heigh=256):
     '''from tile coords and zoom, returns center in degrees'''
     x = coords_to_pixel(longitude, latitude, zoom)[0]
     y = coords_to_pixel(longitude, latitude, zoom)[1]
